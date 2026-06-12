@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>域名出售 | poztl.cn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #fafafa;
+            --bg-card: #ffffff;
+            --accent-blue: #2563eb;
+            --accent-blue-dark: #1d4ed8;
+            --accent-orange: #f59e0b;
+            --accent-red: #ef4444;
+            --text-dark: #111827;
+            --text-medium: #4b5563;
+            --text-light: #9ca3af;
+            --border-light: #e5e7eb;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .bg-decoration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-gradient-1 {
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .bg-gradient-2 {
+            position: absolute;
+            bottom: -200px;
+            left: -200px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .main-content {
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* 顶部徽章 - 出售中 */
+        .sale-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #ef4444, #f59e0b);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 100px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 24px rgba(239, 68, 68, 0.25);
+            animation: pulseBadge 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseBadge {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .sale-badge .dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: blink 1.5s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .sale-badge-text {
+            text-transform: none;
+        }
+
+        /* 域名大展示 */
+        .domain-section {
+            margin-bottom: 50px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .domain-label {
+            font-size: 14px;
+            color: var(--text-light);
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .domain-display {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            padding: 50px 40px;
+            border-radius: 24px;
+            border: 2px solid var(--border-light);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .domain-display::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-orange));
+        }
+
+        .domain-name {
+            font-size: clamp(2.5rem, 8vw, 5.5rem);
+            font-weight: 900;
+            color: var(--text-dark);
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .domain-name .highlight {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .domain-name .ext {
+            color: var(--accent-orange);
+        }
+
+        .domain-subtitle {
+            font-size: 18px;
+            color: var(--text-medium);
+            margin-top: 25px;
+            font-weight: 400;
+        }
+
+        .domain-underline {
+            height: 3px;
+            width: 80px;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-orange));
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+
+        /* 特点卡片 */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .feature {
+            background: var(--bg-card);
+            padding: 20px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--accent-blue);
+        }
+
+        .feature-icon {
+            color: var(--accent-blue);
+            margin-bottom: 8px;
+        }
+
+        .feature-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .feature-desc {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* 联系方式区域 */
+        .contact-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-md);
+            margin-top: 30px;
+        }
+
+        .contact-header {
+            margin-bottom: 30px;
+        }
+
+        .contact-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .contact-desc {
+            font-size: 14px;
+            color: var(--text-medium);
+        }
+
+        /* 联系方式卡片 - 文本可复制 */
+        .contact-items {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            background: #f8fafc;
+            padding: 20px 24px;
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: all 0.2s ease;
+        }
+
+        .contact-item:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .contact-item-icon {
+            width: 44px;
+            height: 44px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: var(--accent-blue);
+            border: 1px solid var(--border-light);
+        }
+
+        .contact-item-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .contact-item-label {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 2px;
+        }
+
+        .contact-item-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-dark);
+            letter-spacing: 0.5px;
+            user-select: text;
+            -webkit-user-select: text;
+        }
+
+        .copy-btn {
+            background: white;
+            border: 1px solid var(--border-light);
+            color: var(--text-medium);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+            font-family: inherit;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-blue);
+            color: white;
+            border-color: var(--accent-blue);
+        }
+
+        .copy-btn.copied {
+            background: #10b981;
+            color: white;
+            border-color: #10b981;
+        }
+
+        /* 快捷操作按钮 */
+        .contact-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-light);
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .action-btn-primary {
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-dark));
+            color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+        }
+
+        .action-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+        }
+
+        .action-btn-secondary {
+            background: #10b981;
+            color: white;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+        }
+
+        .action-btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+        }
+
+        .action-btn-outline {
+            background: white;
+            color: var(--text-dark);
+            border: 2px solid var(--border-light);
+        }
+
+        .action-btn-outline:hover {
+            border-color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
+        /* 底部 */
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 16px;
+            }
+
+            .domain-display {
+                padding: 35px 20px;
+                border-radius: 16px;
+            }
+
+            .contact-section {
+                padding: 25px;
+                border-radius: 16px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .feature {
+                padding: 16px;
+            }
+
+            .contact-item {
+                padding: 16px;
+                flex-wrap: wrap;
+            }
+
+            .contact-item-value {
+                font-size: 16px;
+            }
+
+            .contact-actions {
+                flex-direction: column;
+            }
+
+            .action-btn {
+                justify-content: center;
+            }
+
+            .sale-badge {
+                padding: 10px 24px;
+                font-size: 14px;
+            }
+        }
+
+        /* 复制成功提示 */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--text-dark);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-decoration">
+        <div class="bg-grid"></div>
+        <div class="bg-gradient-1"></div>
+        <div class="bg-gradient-2"></div>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            
+            <div class="sale-badge">
+                <span class="dot"></span>
+                <span class="sale-badge-text">域名出售中</span>
+            </div>
+
+            <div class="domain-section">
+                <div class="domain-label">PREMIUM DOMAIN</div>
+                <div class="domain-display">
+                    <h1 class="domain-name">
+                        <span class="highlight">poztl</span><span class="ext">.cn</span>
+                    </h1>
+                    <div class="domain-underline"></div>
+                    <p class="domain-subtitle">简短易记 · 适合品牌建设</p>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title">简短易记</div>
+                    <div class="feature-desc">5 位字母，简洁好记</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title">国际通用</div>
+                    <div class="feature-desc">.com 后缀，全球通用</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                        </svg>
+                    </div>
+                    <div class="feature-title">品牌潜力</div>
+                    <div class="feature-desc">适合各类业务使用</div>
+                </div>
+            </div>
+
+            <div class="contact-section">
+                <div class="contact-header">
+                    <h2 class="contact-title">联系我购买</h2>
+                    <p class="contact-desc">以下联系方式可直接选中复制，也可点击下方按钮快速联系</p>
+                </div>
+
+                <div class="contact-items">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                            </svg>
+                        </div>
+                        <div class="contact-item-content">
+                            <div class="contact-item-label">手机号码</div>
+                            <div class="contact-item-value" id="phone-text">16675191883</div>
+                        </div>
+                        <button class="copy-btn" onclick="copyText('16675191883', this)">复制</button>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="contact-item-content">
+                            <div class="contact-item-label">电子邮箱</div>
+                            <div class="contact-item-value" id="email-text">824761883@qq.com</div>
+                        </div>
+                        <button class="copy-btn" onclick="copyText('824761883@qq.com', this)">复制</button>
+                    </div>
+                </div>
+
+                <div class="contact-actions">
+                    <a href="tel:16675191883" class="action-btn action-btn-primary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                        </svg>
+                        拨打电话
+                    </a>
+                    <a href="mailto:824761883@qq.com" class="action-btn action-btn-secondary">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        发送邮件
+                    </a>
+                    <button class="action-btn action-btn-outline" onclick="copyAll()">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                        </svg>
+                        复制全部信息
+                    </button>
+                </div>
+            </div>
+
+            <div class="footer">
+                © 2026 poztl.cn · 域名转让中
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">已复制到剪贴板</div>
+
+    <script>
+        function copyText(text, btn) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast('已复制：' + text);
+                if (btn) {
+                    const originalText = btn.textContent;
+                    btn.textContent = '已复制';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                        btn.classList.remove('copied');
+                    }, 1500);
+                }
+            } catch (err) {
+                showToast('复制失败，请手动选中复制');
+            }
+            
+            document.body.removeChild(textarea);
+        }
+
+        function copyAll() {
+            const all = '电话：16675191883\n邮箱：824761883@qq.com';
+            copyText(all, null);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
